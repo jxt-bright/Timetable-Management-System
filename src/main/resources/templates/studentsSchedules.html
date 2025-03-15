@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timetable System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .timetable-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .day-header {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .carousel-item {
+        min-height: 400px;
+        padding: 20px;
+    }
+    .no-classes {
+        color: #6c757d;
+        font-style: italic;
+    }
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 100, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-light">
+<div class="container py-4">
+  <div class="timetable-card p-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1 class="h3 mb-1">
+          <span th:text="${program}"></span>  - Year <span th:text="${year}"></span>
+        </h1>
+      </div>
+      <a th:href="@{/student/timetable/download(program=${program},year=${year})}"
+         class="btn btn-success">
+        <i class="bi bi-file-earmark-pdf"></i> Download PDF
+      </a>
+    </div>
+
+    <!-- Error Messages -->
+    <div th:if="${error}" class="alert alert-danger mb-4" th:text="${error}"></div>
+    <div th:if="${emptySchedule}" class="alert alert-info mb-4">
+      No Lecture is scheduled for this program
+    </div>
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#weeklyView">
+          <i class="bi bi-calendar-week"></i> Weekly View
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#dailyView">
+          <i class="bi bi-calendar-day"></i> Daily View
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Weekly Schedule -->
+      <div class="tab-pane fade show active" id="weeklyView">
+        <div th:each="day : ${dayOrder}" class="mb-4">
+          <div class="day-header">
+            <h3 class="h5 mb-0 text-center" th:text="${day}"></h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="table-primary">
+              <tr>
+                <th>Time</th>
+                <th>Course Code</th>
+                <th>Lecture Room</th>
+                <th>Lecturer</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="schedule : ${schedules}" th:if="${schedule.day != null && #strings.equalsIgnoreCase(schedule.day, day)}">
+                <td th:text="${schedule.startTime} + ' - ' + ${schedule.endTime}"></td>
+                <td th:text="${schedule.courseCode}"></td>
+                <td th:text="${schedule.classRoom}"></td>
+                <td th:text="${schedule.lecturer}"></td>
+              </tr>
+              <tr th:if="${schedules != null && #lists.isEmpty(schedules)}">
+                <td colspan="4" class="text-center no-classes">
+                  No Lecture scheduled
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Schedule Carousel -->
+      <div class="tab-pane fade" id="dailyView">
+        <div id="dailyCarousel" class="carousel slide" data-bs-ride="false">
+          <div class="carousel-inner">
+            <div th:each="day, iter : ${dayOrder}"
+                 th:classappend="${iter.index == 0} ? 'active' : ''"
+                 class="carousel-item">
+              <div class="day-header">
+                <h3 class="h5 mb-0" th:text="${day}"></h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead class="table-primary">
+                  <tr>
+                    <th>Time</th>
+                    <th>Course Code</th>
+                    <th>Classroom</th>
+                    <th>Lecturer</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="schedule : ${schedules}" th:if="${schedule.day != null && #strings.equalsIgnoreCase(schedule.day, day)}">
+                    <td th:text="${schedule.startTime} + ' - ' + ${schedule.endTime}"></td>
+                    <td th:text="${schedule.courseCode}"></td>
+                    <td th:text="${schedule.classRoom}"></td>
+                    <td th:text="${schedule.lecturer}"></td>
+                  </tr>
+                  <tr th:if="${schedules != null && #lists.isEmpty(schedules)}">
+                    <td colspan="4" class="text-center no-classes">
+                      No Lecture scheduled
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#dailyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#dailyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

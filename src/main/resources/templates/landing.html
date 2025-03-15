@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --umat-yellow: #FFD700;
+            --umat-green: #006400;
+            --umat-black: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: var(--umat-black);
+        }
+
+        .navbar {
+            background-color: var(--umat-green) !important;
+            border-bottom: 3px solid var(--umat-yellow);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 100, 0, 0.85), rgba(0, 100, 0, 0.85)),
+                        url('https://www.umat.edu.gh/sites/default/files/2021-09/umat_34.jpg') center/cover;
+            height: 70vh;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .btn-umat {
+            background-color: var(--umat-yellow);
+            color: var(--umat-green);
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 30px;
+            border: 2px solid var(--umat-yellow);
+            transition: all 0.3s;
+        }
+
+        .btn-umat:hover {
+            background-color: transparent;
+            color: var(--umat-yellow);
+            transform: scale(1.05);
+        }
+
+        .feature-card {
+            border-left: 4px solid var(--umat-green);
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .footer {
+            background-color: var(--umat-green);
+            color: var(--umat-yellow);
+            padding: 2rem 0;
+            border-top: 3px solid var(--umat-yellow);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--umat-yellow) !important;
+        }
+
+        .navbar-brand img {
+            margin-right: 10px;
+        }
+
+        .text-umat-green {
+            color: var(--umat-green);
+        }
+    </style>
+</head>
+<body>
+<div class="hero-section">
+    <div class="container text-center">
+        <img src="/images/logo.png" alt="UMaT Logo" height="300">
+        <h1 class="display-4 mb-3">
+            <span class="system-title">Students Timetable Management System</span><br>
+            <span class="university-brand h3 mt-2 d-block">University of Mines and Technology (UMaT)</span>
+        </h1>
+        <p class="lead mb-4">Academic Scheduling Platform for UMaT Community</p>
+        <a href="/login" class="btn btn-umat"> SIGN IN</a>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-3">
+                <div class="card-body">
+                    <h3 class="text-umat-green">For Administrators</h3>
+                    <ul class="list-unstyled">
+                        <li>✓ Create and manage timetables</li>
+                        <li>✓ Update course schedules</li>
+                        <li>✓ Handle lecture room allocations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-3">
+                <div class="card-body">
+                    <h3 class="text-umat-green">For Students</h3>
+                    <ul class="list-unstyled">
+                        <li>✓ View program-specific timetables</li>
+                        <li>✓ Track course schedules</li>
+                        <li>✓ Get real-time updates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card h-100 p-3">
+                <div class="card-body">
+                    <h3 class="text-umat-green">Key Features</h3>
+                    <ul class="list-unstyled">
+                        <li>✓ 24/7 access</li>
+                        <li>✓ Mobile-friendly access</li>
+                        <li>✓ Downloadable schedules</li>
+                        <li>✓ Access from anywhere, at anytime, on any device</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <h5>Students Timetable Management System</h5>
+                <p class="mt-2 mb-0 lead">&copy; 2025 UMaT STMS. All rights reserved.</p>
+                <img src="/images/logo.png" alt="UMaT Logo" height="80">
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <h5>Contact Support</h5>
+                <p>Email: timetable-support@umat.edu.gh<br>
+                    Phone: +233 (0) 542 228 121</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable System</title>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #006400;
+            --secondary: #FFC200;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg,
+                rgba(0, 100, 0, 0.15) 0%,
+                rgba(255, 194, 0, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .selection-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 48px;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .umat-logo {
+            width: 180px;
+            margin-bottom: 32px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        h1 {
+            color: #2D3436;
+            margin-bottom: 32px;
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 12px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            font-size: 1rem;
+            appearance: none;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .mdi-chevron-down {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        .view-timetable-button {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(0, 100, 0, 0.2);
+        }
+
+        .view-timetable-button:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        .footer {
+            margin-top: 32px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+<div class="selection-container">
+    <img src="/images/logo.png" alt="UMaT Logo" class="umat-logo"/>
+    <h1>Timetable Selection Page</h1>
+
+    <form action="/student/timetable" method="get">
+        <div class="form-group">
+            <label for="year">Select Academic Year</label>
+            <div class="select-wrapper">
+                <select id="year" name="year">
+                    <option value="">Select Year</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+                <span class="mdi mdi-chevron-down"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="program">Select Academic Program</label>
+            <div class="select-wrapper">
+                <select id="program" name="program">
+                    <option value="">Select Program</option>
+                    <option value="BSc Computer Science and Engineering">Computer Science & Engineering</option>
+                    <option value="BSc Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="BSc Electrical and Electronic Engineering">Electrical Engineering</option>
+                    <option value="BSc Geomatic Engineering">Geomatic Engineering</option>
+                    <option value="BSc Geological Engineering">Geological Engineering</option>
+                    <option value="BSc Environmental and safety Engineering">Environmental Engineering</option>
+                    <option value="BSc Mathematics">Mathematics</option>
+                    <option value="BSc Civil Engineering">Civil Engineering</option>
+                </select>
+                <span class="mdi mdi-chevron-down"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="view-timetable-button">
+            View Timetable
+        </button>
+    </form>
+
+    <div class="footer">
+        © 2024 University of Mines and Technology | <a href="#">Contact Support</a>
+    </div>
+</div>
+</body>
+</html>
