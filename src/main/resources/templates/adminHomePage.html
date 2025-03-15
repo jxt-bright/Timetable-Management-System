@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <!-- Ensures proper scaling on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Timetable System</title>
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css" rel="stylesheet">
   <style>
@@ -37,6 +39,7 @@
       border-radius: 16px;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
       border: 1px solid var(--border-light);
+      margin: 0 1rem;
     }
 
     h2 {
@@ -50,7 +53,8 @@
 
     form {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      /* Uses auto-fit to adjust the number of columns based on available space */
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
     }
 
@@ -91,6 +95,7 @@
       display: flex;
       gap: 1rem;
       margin-top: 1rem;
+      flex-wrap: wrap;
     }
 
     .btn-submit {
@@ -103,6 +108,7 @@
       font-weight: 600;
       transition: all 0.3s ease;
       flex: 1;
+      min-width: 120px;
     }
 
     .btn-submit:hover {
@@ -120,6 +126,7 @@
       flex: 1;
       text-decoration: none;
       text-align: center;
+      min-width: 120px;
     }
 
     .btn-back:hover {
@@ -135,13 +142,24 @@
       opacity: 0.6;
     }
 
-    @media (max-width: 768px) {
-      form {
-        grid-template-columns: 1fr;
+    /* Adjustments for small screens */
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.5rem;
       }
 
       .container {
         padding: 1.5rem;
+      }
+
+      .form-group input,
+      .form-group select {
+        font-size: 0.9rem;
+      }
+
+      .btn-submit, .btn-back {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -177,13 +195,13 @@
       <input type="time" id="endTime" name="endTime" required />
     </div>
 
-    <!-- Class/Room -->
+    <!-- Lecture Room -->
     <div class="form-group">
       <label for="classRoom">Lecture Room</label>
       <input type="text" id="classRoom" name="classRoom" placeholder="Enter Lecture Room" required />
     </div>
 
-    <!-- Year -->
+    <!-- Academic Year -->
     <div class="form-group">
       <label for="year">Academic Year</label>
       <select id="year" name="year" required>
@@ -195,7 +213,7 @@
       </select>
     </div>
 
-    <!-- Program -->
+    <!-- Academic Program -->
     <div class="form-group">
       <label for="program">Academic Program</label>
       <select id="program" name="program" required>
